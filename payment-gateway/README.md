@@ -32,6 +32,9 @@ This is the basic representation of SafiMoney Payment Gateway Flow
 
 ![](./images/payment_flow.png)
 
+> **SDK**
+For easy integration of SafiMoney Payment Gateway, checkout our [PHP Sdk](https://github.com/safimoney/safimoney-sdk-php)
+
 > **CREATE AN ORDER**
 
 - Customer places an order on your website.
