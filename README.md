@@ -21,7 +21,7 @@
      - Submit ID Proof
      - Approve Transaction
 
-4. [SafiMoney PHP Sdk]()
+4. [SafiMoney PHP Sdk](https://github.com/safimoney/safimoney-sdk-php)
 
    For easy integration of SafiMoney Payment Gateway, checkout our  [PHP Sdk](https://github.com/safimoney/safimoney-sdk-php)
 
