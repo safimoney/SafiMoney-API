@@ -2,7 +2,7 @@
 
 ------
 
-1. [Reference Guide](/REFERENCE.md)
+1. [API Basics Guide](/REFERENCE.md)
 
 2. [Payment Gateway](/payment-gateway/README.md)
 
