@@ -4,9 +4,9 @@
 
 With the Easiest Integration, you can accept Payments from SafiMoney at your website.
 
-**Start and End Payment on the Same Page**. You just need to create order and leave all the complexities of payment process to us.
+> **Start and End Payment on the Same Page**. You just need to create order and leave all the complexities of payment process to us.
 
-> **INTRODUCTION**
+#### INTRODUCTION
 
 - Visit [SafiMoney](https://app.safimoney.com) and Sign Up. 
 
@@ -20,13 +20,15 @@ With the Easiest Integration, you can accept Payments from SafiMoney at your web
 
    ![](./images/credentials.png)
 
-  
-
 - Make sure to copy the secret as it will be displayed only once.
+
+  
 
 **Start Accepting Payments through SafiMoney**
 
-> **PAYMENT FLOW**
+------
+
+#### PAYMENT FLOW
 
 This is the basic representation of SafiMoney Payment Gateway Flow 
 
@@ -35,7 +37,9 @@ This is the basic representation of SafiMoney Payment Gateway Flow
 > **SDK**
 For easy integration of SafiMoney Payment Gateway, checkout our [PHP Sdk](https://github.com/safimoney/safimoney-sdk-php)
 
-> **CREATE AN ORDER**
+
+
+#### CREATE AN ORDER
 
 - Customer places an order on your website.
 
@@ -44,6 +48,13 @@ For easy integration of SafiMoney Payment Gateway, checkout our [PHP Sdk](https:
   ***POST*** ***https://api.safimoney.com/api/v2***
 
   ------
+
+| Bearer Header Token | Description             |
+| ------------------- | ----------------------- |
+| namespace           | PaymentGateway.Redirect |
+| action              | createOrder             |
+
+
 
 | Request Parameters | Description                                                  |            |
 | ------------------ | ------------------------------------------------------------ | ---------- |
@@ -90,13 +101,22 @@ For easy integration of SafiMoney Payment Gateway, checkout our [PHP Sdk](https:
 
 
 
-> GET ORDER
+
+
+#### GET ORDER
 
 - you can get the details of your order from this API endpoint
 
   ***POST*** ***https://api.safimoney.com/api/v2***
 
   ------
+
+| Bearer Header Token | Description             |
+| ------------------- | ----------------------- |
+| namespace           | PaymentGateway.Redirect |
+| action              | getOrder                |
+
+
 
 | Request Parameters | Description     |          |
 | ------------------ | --------------- | -------- |
@@ -147,7 +167,7 @@ For easy integration of SafiMoney Payment Gateway, checkout our [PHP Sdk](https:
 
 
 
-> WEB HOOKS
+#### WEB HOOKS
 
 Web hooks allow you to build or set up integration which subscribe to certain events on SafiMoney API. You can set up web hook by providing notify_url in order creation request.
 
@@ -210,7 +230,15 @@ Web hooks allow you to build or set up integration which subscribe to certain ev
 }
 ```
 
--  We are sending a signature in the web hook. Using this signature, you can validate that the web hook is from SafiMoney.
+- We are sending a signature in the web hook. Using this signature, you can validate that the web hook is from SafiMoney.
+
+  ```
+  Signature hash is created as followes 
+  
+  hash('SHA256', your_api_key+ signature->random_number + your_api_secret);
+  ```
+
+  
 
 - All web hook responses must return a status code in the range `200`
 

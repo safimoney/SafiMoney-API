@@ -12,6 +12,13 @@ SafiMoney Cash In Cash Out API
 
 ------
 
+| Bearer Header Token | Description        |
+| ------------------- | ------------------ |
+| namespace           | Transaction        |
+| action              | cashDepositOffline |
+
+
+
 | Request Parameters | Description                                         |            |
 | ------------------ | --------------------------------------------------- | ---------- |
 | debit_wallet_id    | your wallet id                                      | *required* |
@@ -85,9 +92,18 @@ SafiMoney Cash In Cash Out API
 
   ------
 
-| Request Parameters | Description    |          |
-| ------------------ | -------------- | -------- |
-| id                 | Transaction Id | required |
+| Bearer Header Token | Description |
+| ------------------- | ----------- |
+| namespace           | transaction |
+| action              | search      |
+
+
+
+| Request Parameters | Description     |          |
+| ------------------ | --------------- | -------- |
+| id                 | Transaction Id* | required |
+
+[^id]: do not include SM-, transaction id are purely numerical
 
 **Response**
 
@@ -130,13 +146,22 @@ SafiMoney Cash In Cash Out API
 
 ***POST*** ***https://api.safimoney.com/api/v2***
 
+| Bearer Header Token | Description   |
+| ------------------- | ------------- |
+| namespace           | IdentityProof |
+| action              | save          |
+
+
+
 | Request Parameters | Description                                                  |
 | ------------------ | ------------------------------------------------------------ |
-| transaction_id     | Transaction Id                                               |
+| transaction_id     | Transaction Id*                                              |
 | name               | Name of ID Proof                                             |
 | number             | Number on ID Proof                                           |
 | expiry_date        | Expiry Date of ID Proof                                      |
 | type               | Type of ID Proof e.g for Personal ID Proof set 10 for Business type set 20 |
+
+[^transaction_id]: do not include SM-, transaction id are purely numerical
 
 **Response**
 
@@ -153,10 +178,23 @@ SafiMoney Cash In Cash Out API
 
 ***POST*** ***https://api.safimoney.com/api/v2***
 
+------
+
+| Bearer Header Token | Description              |
+| ------------------- | ------------------------ |
+| namespace           | Transaction              |
+| action              | approveWithdrawByPartner |
+
+
+
 | Request Parameters | Description    |
 | ------------------ | -------------- |
 | id                 | Transaction Id |
 | pin_number         |                |
+
+[^id]: do not include SM-, transaction id are purely numerical
+
+
 
 **Response**
 
