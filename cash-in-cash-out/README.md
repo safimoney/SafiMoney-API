@@ -190,7 +190,7 @@ SafiMoney Cash In Cash Out API
 | Request Parameters | Description    |
 | ------------------ | -------------- |
 | id                 | Transaction Id |
-| pin_number         |                |
+| pin_number         | Withdrawl code |
 
 [^id]: do not include SM-, transaction id are purely numerical
 
