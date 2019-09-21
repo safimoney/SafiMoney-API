@@ -1,43 +1,208 @@
 SafiMoney Cash In Cash Out API
 
-------
-
 **This API is available only for Partner Wallets.**
 
-### <u>**Cash In**</u>
-
-
-
-***POST*** ***https://api.safimoney.com/api/v2***
+Please follow the [reference guide](../reference guide) for more details of SafiMoney API.
 
 ------
 
-| Bearer Header Token | Description        |
-| ------------------- | ------------------ |
-| namespace           | Transaction        |
-| action              | cashDepositOffline |
+```php
+POST https://api.safimoney.com/api/v2
+```
+
+### Get Transaction
+
+To get the details of a transaction
+
+- <u>Bearer Access Token</u>
+
+  | Bearer Header Token | Description |
+  | ------------------- | ----------- |
+  | namespace           | Transaction |
+  | action              | get         |
+
+  
+
+- <u>Request Parameters</u>
+
+  The get transaction request should include the following parameters:
+
+  | Request Parameters | Description            | Type    |          |
+  | ------------------ | ---------------------- | ------- | -------- |
+  | id                 | id of your transaction | numeric | required |
+
+  
+
+- <u>Response</u>
+
+  ```json
+  {
+      "request": {
+          "id": "1000000000001357"
+      },
+      "status": "200",
+      "data": {
+          "transaction": {
+              "id": "1000000000001357",
+              "debit_wallet_id": "1000000000000000",
+              "credit_wallet_id": "1000000000004750",
+              "purpose": null,
+              "debit_transfer_value": 12,
+              "debit_amount": 112,
+              "credit_transfer_value": 12,
+              "credit_amount": 12,
+              "debit_fee_amount": 100,
+              "credit_fee_amount": 0,
+              "partner_commission": 50,
+              "debit_country": "CM",
+              "debit_currency": "XAF",
+              "credit_country": "CM",
+              "credit_currency": "XAF",
+              "exchange_rate": 1,
+              "reference_id": null,
+              "status": "Freeze",
+              "sender_name": null,
+              "receiver_name": "user-1",
+              "receiver_mobile_number": "+237-666111444",
+              "approved_at": null,
+              "invoice_id": 62,
+              "notes": null,
+              "cancelled_at": null
+          }
+      },
+      "error": null
+  }
+  ```
+
+  - data
+
+    | Parameters             | Description |
+    | ---------------------- | ----------- |
+    | id                     |             |
+    | debit_wallet_id        |             |
+    | credit_wallet_id       |             |
+    | purpose                |             |
+    | debit_transfer_value   |             |
+    | debit_amount           |             |
+    | credit_transfer_value  |             |
+    | credit_amount          |             |
+    | debit_fee_amount       |             |
+    | credit_fee_amount      |             |
+    | partner_commission     |             |
+    | debit_country          |             |
+    | debit_currency         |             |
+    | credit_country         |             |
+    | credit_currency        |             |
+    | exchange_rate          |             |
+    | reference_id           |             |
+    | status                 |             |
+    | sender_name            |             |
+    | receiver_name          |             |
+    | receiver_mobile_number |             |
+    | approved_at            |             |
+    | invoice_id             |             |
+    | notes                  |             |
+    | cancelled_at           |             |
+
+    
+
+  - error
+
+    - Validation Error
+
+      - *Required*
+
+        ```json
+        "error": {
+            "title": "Error !",
+            "message": "The id field is required.",
+            "remedy": "Please Retry or Report to Support Team !",
+            "validation": {
+                "id": [
+                	"The id field is required."
+                ]
+            },
+            "data": null
+        }
+        ```
+
+        
+
+      - *Invalid*
+
+        ```json
+        "error": {
+            "title": "Error !",
+            "message": "The selected id is invalid.",
+            "remedy": "Please Retry or Report to Support Team !",
+            "validation": {
+                "id": [
+                	"The selected id is invalid."
+                ]
+            },
+            "data": null
+        }
+        ```
+
+        
+
+### Get Transaction By Reference ID
 
 
 
-| Request Parameters | Description                                         |            |
-| ------------------ | --------------------------------------------------- | ---------- |
-| debit_wallet_id    | your wallet id                                      | *required* |
-| amount             | Amount you want to deposit                          | *required* |
-| amount_type        | Please see the below note                           | *required* |
-| debit_currency     | Your wallet's currency (ex. XAF OR EUR)             | *required* |
-| credit_currency    | Wallet's currency in which you want to deposit cash | *required* |
-| credit_wallet_id   | Wallet's ID in which you want to deposit cash       | *required* |
-| type               | For Cash In type is 4                               | *required* |
-| purpose            | Purpose/notes attached to this transaction          | *optional* |
+### List of Transactions
 
-> Note : Amount type denotes that the Fee (if any) will be deducted from the entered amount or additionally charged on entered amount.  
-> These are the values for amount type:
->
-> 'debit_amount' : 'Fee (if any) will be deducted from the entered amount',
->
-> 'debit_transfer_value' : 'Fee (if any) will be additionally charged on entered amount'
 
-**Response**
+
+
+
+### Cash In
+
+The Cash In request will deposit the wallet money in the requested wallet in return of Cash. 
+
+- <u>Bearer Access Token</u>
+
+  To create access token for Cash In request, the namespace and action are as follows: 
+
+  | Bearer Header Token | Description |
+  | ------------------- | ----------- |
+  | namespace           | Transaction |
+  | action              | cashIn      |
+
+  
+
+- <u>Request Parameters</u>
+
+  The Cash In Request should include the following parameters:
+
+  | Request Parameters | Description                                              | type      |            |
+  | ------------------ | -------------------------------------------------------- | --------- | ---------- |
+  | reference_id       | This reference id will help you to track the transaction | string    | *optional* |
+  | debit_wallet_id    | your wallet id                                           | *numeric* | *required* |
+  | amount             | amount you want to deposit                               | *decimal* | *required* |
+  | include_fee        | fee (if any) will be deducted from the entered amount    | *boolean* | *required* |
+  | debit_currency     | your wallet's currency (ex. XAF OR EUR)                  | *string*  | *required* |
+  | credit_currency    | wallet's currency in which you want to deposit           | *string*  | *required* |
+  | credit_wallet_id   | wallet's ID in which you want to deposit                 | *numeric* | *required* |
+  | purpose            | purpose/notes attached to this transaction               | *string*  | *optional* |
+
+  
+
+- <u>Response</u>
+
+  The response consist of following details:
+
+  - request
+
+    
+
+  - status
+
+  - data
+
+  - error
+
+    
 
 ```json
 {
@@ -83,27 +248,6 @@ SafiMoney Cash In Cash Out API
   
 
 ### <u>Cash Out</u>
-
-
-
-- **Search Transaction** 
-
-  ***POST*** ***https://api.safimoney.com/api/v2***
-
-  ------
-
-| Bearer Header Token | Description |
-| ------------------- | ----------- |
-| namespace           | transaction |
-| action              | search      |
-
-
-
-| Request Parameters | Description     |          |
-| ------------------ | --------------- | -------- |
-| id                 | Transaction Id* | required |
-
-[^id]: do not include SM-, transaction id are purely numerical
 
 **Response**
 
